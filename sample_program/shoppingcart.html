@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Shopping Cart</title>
+</head>
+<body class="bg-gray-300 flex justify-center items-center h-screen">
+
+    <div class=" max-w-md bg-white p-8 rounded-lg shadow-lg">
+        <h1 class="text-4xl font-bold text-gray-800 mb-6 text-center">Shopping Cart</h1>
+
+        <form class="flex flex-col mb-4">
+            <label for="prdname" class="text-lg text-gray-600 mb-2">Product</label>
+            <input type="text" id="prdname" class="p-2 border border-gray-300 rounded mb-4">
+
+            <label for="quantity" class="text-lg text-gray-600 mb-2">Qty</label>
+            <input type="number" id="quantity" class="p-2 border border-gray-300 rounded mb-4">
+
+            <label for="price" class="text-lg text-gray-600 mb-2">Price</label>
+            <input type="number" id="price" class="p-2 border border-gray-300 rounded mb-4">
+
+            <label for="amount" class="text-lg text-gray-600 mb-2">Amount</label>
+            <input type="number" id="amount" class="p-2 border border-gray-300 rounded mb-4" readonly>
+
+            <button type="button" id="addButton" class="p-3 bg-blue-800 text-white rounded-md">Add</button>
+        </form>
+
+        <table class="min-w-full bg-gray-200 mt-6">
+            <thead>
+                <tr>
+                    <th class="border px-4 py-2">Product</th>
+                    <th class="border px-4 py-2">Qty</th>
+                    <th class="border px-4 py-2">Price</th>
+                    <th class="border px-4 py-2">Amount</th>
+                </tr>
+            </thead>
+            <tbody id="cartTable">
+             
+            </tbody>
+        </table>
+
+        <div class="mt-6 flex justify-between text-lg">
+            <span>Total: </span>
+            <span id="totalAmount" class="font-bold">0</span>
+        </div>
+    </div>
+
+    <script>
+       
+        document.getElementById('quantity').addEventListener('input', updateAmount);
+        document.getElementById('price').addEventListener('input', updateAmount);
+
+        function updateAmount() {
+            const price = parseFloat(document.getElementById('price').value) || 0;
+            const quantity = parseFloat(document.getElementById('quantity').value) || 0;
+            const amount = price * quantity;
+            document.getElementById('amount').value = amount.toFixed(2);
+        }
+
+       
+        document.getElementById('addButton').addEventListener('click', function() {
+            const product = document.getElementById('prdname').value;
+            const quantity = parseFloat(document.getElementById('quantity').value);
+            const price = parseFloat(document.getElementById('price').value);
+            const amount = parseFloat(document.getElementById('amount').value);
+
+            if (product && quantity > 0 && price > 0) {
+               
+                const row = document.createElement('tr');
+
+                row.innerHTML = `
+                    <td class="border px-4 py-2">${product}</td>
+                    <td class="border px-4 py-2">${quantity}</td>
+                    <td class="border px-4 py-2">${price.toFixed(2)}</td>
+                    <td class="border px-4 py-2">${amount.toFixed(2)}</td>
+                `;
+
+               
+                document.getElementById('cartTable').appendChild(row);
+
+        
+                updateTotalAmount();
+
+               
+                document.getElementById('prdname').value = '';
+                document.getElementById('quantity').value = '';
+                document.getElementById('price').value = '';
+                document.getElementById('amount').value = '';
+            } else {
+                alert('Please enter valid product, quantity, and price values.');
+            }
+        });
+
+   
+        function updateTotalAmount() {
+            let total = 0;
+            const rows = document.querySelectorAll('#cartTable tr');
+            rows.forEach(row => {
+                const amount = parseFloat(row.children[3].textContent);
+                total += amount;
+            });
+
+            document.getElementById('totalAmount').textContent = total.toFixed(2);
+        }
+    </script>
+
+</body>
+</html>
