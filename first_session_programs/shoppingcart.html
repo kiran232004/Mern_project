@@ -12,28 +12,28 @@
         <h1 class="text-4xl font-bold text-gray-800 mb-6 text-center">Shopping Cart</h1>
 
         <form class="flex flex-col mb-4">
-            <label for="prdname" class="text-lg text-gray-600 mb-2">Product</label>
+            <label for="prdname" class="text-lg font-bold  mb-2">Product</label>
             <input type="text" id="prdname" class="p-2 border border-gray-300 rounded mb-4">
 
-            <label for="quantity" class="text-lg text-gray-600 mb-2">Qty</label>
+            <label for="quantity" class="text-lg font-bold mb-2">Qty</label>
             <input type="number" id="quantity" class="p-2 border border-gray-300 rounded mb-4">
 
-            <label for="price" class="text-lg text-gray-600 mb-2">Price</label>
+            <label for="price" class="text-lg font-bold mb-2">Price</label>
             <input type="number" id="price" class="p-2 border border-gray-300 rounded mb-4">
 
-            <label for="amount" class="text-lg text-gray-600 mb-2">Amount</label>
+            <label for="amount" class="text-lg font-bold mb-2">Amount</label>
             <input type="number" id="amount" class="p-2 border border-gray-300 rounded mb-4" readonly>
 
             <button type="button" id="addButton" class="p-3 bg-blue-800 text-white rounded-md">Add</button>
         </form>
 
-        <table class="min-w-full bg-gray-200 mt-6">
+        <table class="min-w-full bg-gray-200 border-collapse mt-6">
             <thead>
                 <tr>
-                    <th class="border px-4 py-2">Product</th>
-                    <th class="border px-4 py-2">Qty</th>
-                    <th class="border px-4 py-2">Price</th>
-                    <th class="border px-4 py-2">Amount</th>
+                    <th class="border font-bold bg-gray-400 py-2">Product</th>
+                    <th class="border font-bold bg-gray-400 py-2">Qty</th>
+                    <th class="border font-bold bg-gray-400 px-4 py-2">Price</th>
+                    <th class="border font-bold bg-gray-400 px-4 py-2">Amount</th>
                 </tr>
             </thead>
             <tbody id="cartTable">
