@@ -33,7 +33,7 @@ const studentmodel=mongoose.model(collection_name,schema);
 const readall=async()=>{
     await connectToMongo();
     try {
-        const students=await studentmodel.findOne({location:"chennai"});
+        const students=await studentmodel.find({});
         console.log(students);
         
     } catch (error) {
